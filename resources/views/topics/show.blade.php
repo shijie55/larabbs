@@ -42,21 +42,21 @@
                     <div class="topic-body">
                         {!! $topic->body !!}
                     </div>
-
-                    <div class="operate">
-                        <hr>
-                        <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-default btn-xs" role="button">
-                            <i class="glyphicon glyphicon-edit"></i> 编辑
-                        </a>
-                        <form method="post" action="{{route('topics.destroy', $topic->id)}}" accept-charset="UTF-8" style="margin-top: -23px;margin-left: 60px;">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            {{method_field('delete')}}
-                            <button class="btn btn-default btn-xs" type="submit">
-                                <i class="glyphicon glyphicon-trash"></i> 删除
-                            </button>
-                        </form>
-                    </div>
-
+                    @can('update', $topic)
+                        <div class="operate">
+                            <hr>
+                            <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-default btn-xs" role="button">
+                                <i class="glyphicon glyphicon-edit"></i> 编辑
+                            </a>
+                            <form method="post" action="{{route('topics.destroy', $topic->id)}}" accept-charset="UTF-8" style="margin-top: -23px;margin-left: 60px;">
+                                {{ csrf_field() }}
+                                {{method_field('delete')}}
+                                <button class="btn btn-default btn-xs" type="submit">
+                                    <i class="glyphicon glyphicon-trash"></i> 删除
+                                </button>
+                            </form>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
