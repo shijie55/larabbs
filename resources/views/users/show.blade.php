@@ -28,19 +28,21 @@
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                <span>
-                    <h1 class="panel-title pull-left" style="font-size:30px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
-                </span>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#">Ta 的话题</a></li>
+                        <li><a href="#">Ta 的回复</a></li>
+                    </ul>
+                    @include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
                 </div>
             </div>
             <hr>
 
             {{-- 用户发布的内容 --}}
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    {{ $user->introduction }}
-                </div>
-            </div>
+            {{--<div class="panel panel-default">--}}
+                {{--<div class="panel-body">--}}
+                    {{--{{ $user->introduction }}--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
         </div>
     </div>
