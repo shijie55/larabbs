@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
         // 生成数据集合
         $users = factory(User::class)
             ->times(10)
-            ->make(['password' => '123456'])
+            ->make(['password' => bcrypt('123456')])
             ->each(function ($user, $index)
             use ($faker, $avatars)
             {
