@@ -20,6 +20,8 @@
 
                         <div class="notification-list">
                             @foreach ($notifications as $notification)
+                                {{--snake_case 方法是将驼峰字符串转化为下划线--}}
+                                {{--class_basename 方法会将 返回路径中的文件名部分--}}
                                 @include('notifications.types._' . snake_case(class_basename($notification->type)))
                             @endforeach
 

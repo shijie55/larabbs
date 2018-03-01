@@ -11,6 +11,7 @@ class User extends Authenticatable
     use Notifiable {
         notify as protected laravelNotify;
     }
+    //重写notify 为了notification_count加1
     public function notify($instance)
     {
         // 如果要通知的人是当前用户，就不必通知了！
@@ -18,6 +19,7 @@ class User extends Authenticatable
             return;
         }
         $this->increment('notification_count');
+        //laravelNotify 是再次调用 Notifiable trait 里的 notify 方法 (notify as protected laravelNotify;)
         $this->laravelNotify($instance);
     }
 

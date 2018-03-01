@@ -16,10 +16,10 @@ class ReplyObserver
         $reply->content = clean($reply->content, 'user_topic_body');
     }
 
-    public function updating(Reply $reply)
-    {
-        //
-    }
+//    public function updating(Reply $reply)
+//    {
+//        //
+//    }
 
     public function created(Reply $reply)
     {
@@ -27,6 +27,6 @@ class ReplyObserver
         $topic->increment('reply_count', 1);
 
         // 通知作者当前topic话题被回复了
-        $topic->user->notify(new TopicReplied($reply));
+        $topic->user->notify(new TopicReplied($reply));//调用laravel消息通知
     }
 }
