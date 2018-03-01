@@ -13,8 +13,9 @@ class ReplyPolicy extends Policy
         return true;
     }
 
+    //删除权限，只有当前帖子或者发布回复的人可以删
     public function destroy(User $user, Reply $reply)
     {
-        return true;
+        return $user->isAuthorOf($reply) || $user->isAuthorOf($reply->topic);
     }
 }

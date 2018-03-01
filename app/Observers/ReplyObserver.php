@@ -29,4 +29,9 @@ class ReplyObserver
         // 通知作者当前topic话题被回复了
         $topic->user->notify(new TopicReplied($reply));//调用laravel消息通知
     }
+
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->decrement('reply_count', 1);
+    }
 }

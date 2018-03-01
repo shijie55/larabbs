@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Handlers\SlugTranslateHandler;
 use App\Jobs\TranslateSlug;
 use App\Models\Topic;
+use Illuminate\Support\Facades\DB;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
@@ -36,6 +37,13 @@ class TopicObserver
 //        }
     }
 
+    //删除话题时将该话题下的所有回复全部删除
+    public function deleted(Topic $topic)
+    {
+        DB::table('replies')->where('topic_id', $topic->id)->delete();
+    }
+
+    //保存话题时将 seo url 优化放入队列中
     public function saved(Topic $topic)
     {
         // 如 slug 字段无内容，即使用翻译器对 title 进行翻译
