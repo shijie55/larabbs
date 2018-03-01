@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
 	{
 	    //事件监听器注册
 		\App\Models\User::observe(\App\Observers\UserObserver::class);
+		\App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
 		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
 
 		//时间中文化
